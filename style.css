@@ -1,0 +1,262 @@
+/*
+    Michael Kellems
+    CIT 215
+    Prof. Kane
+    11/25/24
+*/
+
+html{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #808082;
+}
+
+#header{
+    z-index: 2;
+}
+
+h1{
+    text-align: center;
+    margin: 0 auto;
+    text-decoration: underline #FFCE0B;
+    background-color: #061930;
+    padding: 5px;
+}
+
+#footer{
+    width: 100%;
+    background-color: #061930;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    left: 0;
+    box-sizing: content-box;
+    margin-bottom: 10px;
+    z-index: 2;
+}
+
+#footer p{
+    position: absolute;
+    text-align: center;
+    width: 50%;
+    left: 25%;
+}
+
+#footer a img{
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 5px;
+    margin: 5px;
+    margin-top: 10px;
+    opacity: .8;
+}
+
+#links{
+    position: absolute;
+    padding: 0;
+    right: 0;
+    height:100%;
+}
+
+a{
+    border: none;
+}
+
+body{
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#body{
+    background-color: #808082;
+    width: 100%;
+    height: 100%;
+}
+
+#content{
+    height: 50%;
+    width: 90%;
+    background-color: white;
+    border: 2.5px solid #061930;
+    border-radius: 25px;
+    margin-left: 5%;
+    position: absolute;
+    bottom: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    z-index: 0;
+}
+
+#passselector{
+    width: 10%;
+    height: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    border: 2px solid #061930;
+}
+
+#bikeselector{
+    width: 10%;
+    height: 100%;
+    margin-top: -50px;
+    background-color: white;
+    box-sizing: border-box;
+    border: 2px solid #061930;
+    border-left: 0;
+    margin-left: 10%;
+}
+
+input{
+    all: unset;
+    margin: 0 auto;
+    overflow: visible;
+    border: 0;
+    color: #808082;
+    font-size: large;
+    width: 100%;
+    height: 100%;
+}
+
+#timeinput{
+    width: 50%;
+    height: 100%;
+    margin-top: -50px;
+    background-color: white;
+    box-sizing: border-box;
+    border: 2px solid #061930;
+    border-left: 0;
+    margin-left: 20%;
+    text-align: left;
+    padding: 10px;
+    text-decoration: underline;
+}
+
+li button{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    border: none;
+    color: #061930;
+}
+
+
+#selectionbar{
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: 80px;
+    list-style-type: none;
+    padding-left: 5%;
+    padding-right: 5%;
+    z-index: 1;
+}
+
+#passesselectionmenu{
+    height: 100px;
+    width: 100%;
+    border: 2.5px solid #061930;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    position: relative;
+    z-index: 1;
+}
+
+#biketypesselectionmenu{
+    height: 100px;
+    width: 100%;
+    border: 2.5px solid #061930;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    position: relative;
+    z-index: 1;
+}
+
+.optionbutton{
+    width:100%;
+    height:50px;
+    background-color: white;
+    color: #061930;
+    border: none;
+    border-bottom: 1px solid #061930;
+    box-sizing: border-box;
+    z-index: 1;
+    position: relative;
+}
+
+#resultbutton{
+    box-sizing: border-box;
+    height: 50px;
+    width: 10%;
+    color: #061930;
+    border: 2px solid #061930;
+    border-left: 0;
+    margin-left: 70%;
+    margin-top: -50px;
+    background-color: #061930;
+}
+
+#resetbutton{
+    box-sizing: border-box;
+    height: 50px;
+    width: 10%;
+    color: #061930;
+    border: 2px solid #061930;
+    border-left: 0;
+    margin-left: 80%;
+    margin-top: -50px;
+    background-color: #061930;
+}
+
+#resultbutton button{
+    background-color: #FFCE0B;
+    height: 100%;
+    width: 100%;
+    color: #061930;
+    font-size: large;
+    overflow: hidden;
+}
+
+#resetbutton button{
+    background-color: #FFCE0B;
+    height: 100%;
+    width: 100%;
+    color: #061930;
+    font-size: large;
+    overflow: hidden;
+}
+
+.tripdisplay{
+    height: 120px;
+    border-bottom: 2px solid #061930;
+    width: 100%;
+    padding: 10px;
+}
+
+.tripheader{
+    width: 100%;
+    height: 40%;
+    text-align: left;
+    font-size: large;
+    color: #061930;
+}
+
+.tripcharges{
+    width: 100%;
+    height: 40%;
+    text-align: end;
+    font-size: large;
+    color: #061930;    
+}
+
+.tripcharges span{
+    text-decoration: underline;
+}
+
+.disclosures{
+    color: red;
+    font-size: small;
+    margin-top:-30px;
+}

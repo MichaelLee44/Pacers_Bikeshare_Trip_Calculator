@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!--
+    Michael Kellems
+    CIT 215
+    Prof. Kane
+    11/25/24
+-->
+
+<script src = "lib/jquery-3.7.1.js" defer></script>
+<script src = "lib/bikeshareinformation.js" defer></script>
+<script src = "script.js" defer></script>
+<link href = "style.css" rel = "stylesheet" defer></link>
+
+
+<html>
+    <head>
+    </head>
+    <body>
+        <div id = "wrapper">
+            <div id = "header">
+                <h1>Welcome to the Indiana Pacers Bikeshare trip calculator!</h1>
+            </div>
+            <div id = "body">
+                <ul id = "selectionbar">
+                    <li id = "passselector">
+                        <button id = "select" opened = "false" onclick = "fakeSelect($(this), passes, 'name');">Select a pass...</button>
+                    </li>
+                    <li id = "bikeselector">
+                        <button id = "select" opened = "false" onclick = "fakeSelect($(this), biketypes, 'name');">Select a bike..</button>
+                    </li>
+                    <li id = "timeinput">
+                        <input value = "How many minutes will you be riding?..."> </input>
+                    </li>
+                    <li id = "resultbutton">
+                        <button onclick = "generatecontent($(this))" onmouseout = "contentbuttonreset($(this))">generate</button>
+                    </li>
+                    <li id = "resetbutton">
+                        <button onclick = "resetcontent($(this))" onmouseout = "contentbuttonreset($(this))">reset/clear</button>
+                    </li>
+                </ul>
+                <div id = "content">
+
+                </div>
+            </div>
+            <div id = "footer">
+                <p>Created by Michael Kellems<br></br>Indianapolis Cultural Trail 2024</p>
+                <div id = "links">
+                    <a id = "bikesharelink" href = "https://www.pacersbikeshare.org">
+                        <img></img>
+                    </a>
+                    <a id = "ICTlink" href = "https://www.indyculturaltrail.org">
+                        <img></img>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
