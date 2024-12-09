@@ -16,6 +16,7 @@ Prof. Kane
 let currentselectedpass = null;
 let currentselectedbike = null;
 let trips = []
+let tripsbackup = []
 
 
 /*I wanted to use a <select> tag with custom styling but realize soon you cannot do that 
@@ -55,6 +56,9 @@ const fakeSelect = (target, options, attribute) => {
 };
 
 //completely clears the trips array and the content box
+/*
+    SATISFIES DELETE PART OF CRUD BY ALLOWING FOR THE USER TO COMPLETELY DELETE THE CONTENT OF THE TRIPS ARRAY
+*/
 function resetcontent(target){
     buttonclick(target);
     trips = [];
@@ -63,9 +67,9 @@ function resetcontent(target){
 }
 
 //this function generates the trip estimates that eventually fill the trips array and visually displays them in the content box with jquery
-function generatecontent(target){
+function generatecontent(target, push){
     buttonclick(target);
-    if(currentselectedbike && currentselectedbike){
+    if(currentselectedbike && currentselectedbike){ //make sure that user has selected valid values
         let content = $("#content");
         let timeinput = $("#timeinput input");
         let time = parseInt(timeinput.val());
@@ -75,7 +79,9 @@ function generatecontent(target){
             let checkoutfee = null;
             let total = null;
             let rate = null;
-            content.html("");
+            content.html(""); // clear content box so the content can be visually updated without retaining old content
+
+            //determine minute based rate applicable for each trip before calculating prices
             if (currentselectedbike == biketypes[0].name){
                 checkoutfee = biketypes[0].checkoutcost;
                 rate = biketypes[0].usagerate;
@@ -84,7 +90,8 @@ function generatecontent(target){
                 rate = biketypes[1].usagerate;
             };
 
-            if (currentselectedpass == passes[0].name){ // indyrides free
+            //calculating prices based on pass selections
+            if (currentselectedpass == passes[0].name){ // indyrides free price calculations
                 checkoutfee = 0;
                 if(time>30){
                     usagefee = (time-30)*rate;
@@ -93,7 +100,7 @@ function generatecontent(target){
                     usagefee = 0;
                     total = 0;
                 };
-            } else if (currentselectedpass == passes[1].name){ //annual pass
+            } else if (currentselectedpass == passes[1].name){ //annual pass price calculations
                 checkoutfee = 0;
                 if(time>60){
                     usagefee = (time-60)*rate;
@@ -102,33 +109,41 @@ function generatecontent(target){
                     usagefee = 0;
                     total = 0;
                 };
-            } else if (currentselectedpass = passes[2].name){ //pay as you ride
+            } else if (currentselectedpass = passes[2].name){ //pay as you ride price calculations
                 usagefee = time * rate;
                 total = checkoutfee + usagefee;
             };
 
             //add new trip estimate to trips array
-            trips.push(
-                {
-                    pass: currentselectedpass,
-                    bike: currentselectedbike,
-                    triptime: time,
-                    checkout: checkoutfee,
-                    usage: usagefee,
-                    totalcost: total,
-                    disclosure: "",
-                }
-            );
+            /*
+            SATISFY CREATE REQUIREMENT OF CRUD BY GENERATING NEW TRIPS
+            */
+            if (push){
+                trips.push(
+                    {
+                        pass: currentselectedpass,
+                        bike: currentselectedbike,
+                        triptime: time,
+                        checkout: checkoutfee,
+                        usage: usagefee,
+                        totalcost: total,
+                        disclosure: "",
+                    }
+                );
+            };
 
-            //display trips in the content box
+            //whenever the user "generates" a new trip, it creates a new object in trips array, this foreach access the array to display each "trip"
+            /*
+            SATISFY READ REQUIREMENT OF CRUD BY READING AND DISPLAYING TRIPS ARRAY
+            */
             trips.forEach(trip => {
-                let marginnumber = trip.bike==biketypes[0].name ? `-30px` : `-40px`;
+                let marginnumber = trip.bike==biketypes[0].name ? `-30px` : `-40px`; //slightly adjust margin based on bike type
                 if (trip.disclosure == ""){
-                    trip.disclosure+=`${(trip.bike==biketypes[0].name ? `*${biketypes[0].name} bike base price: checkout fee: $${biketypes[0].checkoutcost} usage rate: $${biketypes[0].usagerate} per minute*` : `*${biketypes[1].name} bike base price: checkout fee: $${biketypes[1].checkoutcost} usage rate: $${biketypes[1].rate} per minute*<br>*Due to system limits, $2.00 of the e-bike checkout fee are initial and the remaining $3.00 are charged with the usage fee*`)}
+                    trip.disclosure+=`${(trip.bike==biketypes[0].name ? `*${biketypes[0].name} bike base price: checkout fee: $${biketypes[0].checkoutcost} usage rate: $${biketypes[0].usagerate} per minute*` : `*${biketypes[1].name} bike base price: checkout fee: $${biketypes[1].checkoutcost} usage rate: $${biketypes[1].usagerate} per minute*<br>*Due to system limits, $2.00 of the e-bike checkout fee are initial and the remaining $3.00 are charged with the usage fee*`)}
                     <br>
                     *checkout fees only apply to pay as you ride trips*<br>
                     *IRF - Annual Pass trips charge after 30 minutes while regular annual passes charge after 60 minutes.*
-                    `
+                    `;
                 };
                 content.append(
                     `<div class = "tripdisplay" >
@@ -139,33 +154,41 @@ function generatecontent(target){
                 );
             });
             console.log(trips);
-        } else {
+        } else { //error message that indicates a noninteger value was entered for trip time.
             alert("It appears that you have not enter a trip time, please enter a trip time.");
         };
-    } else {
+    } else { //error message that indicates selections were not made
         alert("Double check your pass and bike selection your selections appear to be blank.");
     };
     return;
 };
 
-//visual effect for buttons
+//visual effects for when mouseout happens on a clicked button
 function contentbuttonreset(target){
     target.parent().css("padding", "0px");
     return;
 };
 
-//visual effect for buttons
+//visual effect for when buttons are clicked
 function buttonclick(target){
    target.parent().css("padding", "5px");
    return;
 };
 
+function createfiltersmenu(target){
+    buttonclick(target)
+    body = $("#body")
+}
+
 //function returns the "storedvalue" attribute of an option button, also visually does some stuff
 function getvalue(target, options, attribute){
+    //use ternary operator to determine what arrays to access.
     let optionsvalue = options==getPasses() ? `passes` : `biketypes`;
+    //test
     console.log(currentselectedpass);
     console.log(currentselectedbike);
     console.log(target.parent());
+    //returns value selected when pressing a selection button and updates markeup to show that a selection was made
     target.parent().parent().html(`<button id = "select" onclick = "fakeSelect($(this), ${optionsvalue}, '${attribute}');" opened = "false">${target.attr("storedvalue")}</button>`);
     return target.attr("storedvalue");
 };
@@ -184,7 +207,7 @@ function run()
     bikesharelink.attr('src', PBSlogo);
     ICTlink.attr('src', ICTlogo);
 
-    //add jquery styling for when the mouse goes over each of the footer buttons 
+    //add jquery styling for when the mouse goes over each of the footer buttons and leaves them
     bikesharelink.on("mouseenter", function()
     {
         bikesharelink.css("width", "90px");
@@ -214,6 +237,8 @@ function run()
         ICTlink.css("margin-top", "10px");
     });
 
+
+    //IIFE for interacting with the input
     input.on("click", function()
     {
         if (input.attr("value", "How many minutes will you be riding?...")){
@@ -227,5 +252,5 @@ function run()
     return;
 }
 
-//when document is ready
+//when document is ready, initialize things which are not yet initialized
 $(document).ready(run());
