@@ -65,7 +65,7 @@ function resetcontent(target){
 //this function generates the trip estimates that eventually fill the trips array and visually displays them in the content box with jquery
 function generatecontent(target){
     buttonclick(target);
-    if(currentselectedbike && currentselectedbike){
+    if(currentselectedpass && currentselectedbike){
         let content = $("#content");
         let timeinput = $("#timeinput input");
         let time = parseInt(timeinput.val());
